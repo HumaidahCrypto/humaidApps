@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blockchain Example</title>
+  <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/HumaidahCrypto/humaidApps/main/image/favicon.png"/>
+  <style>
+    body {
+      background-image: url(https://raw.githubusercontent.com/HumaidahCrypto/humaidApps/main/image/background.png);
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 800px;
+      margin: 20px auto;
+      text-align: left;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #fff;
+    }
+    th {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Get Info Demo</h1>
+
+  <button onclick="getInfo()">Get Info</button>
+
+  <br><br>
+
+  <table border="1">
+    <tr>
+      <th>Field</th>
+      <th>Value</th>
+    </tr>
+    <tbody id="info-table">
+    </tbody>
+  </table>
+
+  <script>
+    async function getInfo() {
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json'
+        }
+      };
+
+      const response = await fetch('https://master1.blockchain-servers.world/v1/chain/get_info', requestOptions);
+      const data = await response.json();
+
+      let tableBody = '';
+      for (let key in data) {
+        tableBody += `
+          <tr>
+            <td>${key}</td>
+            <td>${JSON.stringify(data[key])}</td>
+          </tr>
+        `;
+      }
+      document.getElementById('info-table').innerHTML = tableBody;
+    }
+  </script>
+
+</body>
+</html>
